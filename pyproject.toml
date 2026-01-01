@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "maze"
+version = "0.1.0"
+description = ""
+authors = ["marek.borecki <marek.borecki@fasolutions.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.14"
+tk = "^0.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
