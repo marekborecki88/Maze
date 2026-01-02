@@ -1,6 +1,8 @@
 from tkinter import Tk, Label, Entry, Button, Canvas, mainloop
 from typing import Optional
 
+from app.Path import Path
+
 APP_NAME = 'Maze Generator'
 BUILD_MAZE_CAPTION = 'Build Maze'
 NEW_MAZE_CAPTION = 'New Maze'
@@ -30,9 +32,8 @@ def on_cell_click(event):
         cells[(row, col)] = (cell_id, new_color)
 
 def solve_maze():
-    """Find and display the shortest path in the maze"""
-    print("Solving maze...")
-    # TODO: Implement pathfinding algorithm
+    paths = {f'${col}:${row}': Path(x=col, y=row) for (row, col), (cell_id, color) in cells.items() if color == 'black'}
+
 
 def create_form():
     """Create and display the maze configuration form"""
