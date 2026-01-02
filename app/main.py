@@ -1,5 +1,10 @@
 from tkinter import Tk, Label, Entry, Button, Canvas, mainloop
 
+APP_NAME = 'Maze Generator'
+BUILD_MAZE_CAPTION = 'Build Maze'
+NEW_MAZE_CAPTION = 'New Maze'
+SOLVE_MAZE_CAPTION = 'Solve Maze'
+
 CELL_SIZE = 30
 cells = {}  # Dictionary to store cell rectangles and their colors
 
@@ -73,13 +78,13 @@ def build_maze():
             cells[(row, col)] = (cell_id, 'white')  # Store cell ID and color
 
     # Add Solve Maze and New Maze buttons
-    Button(master, text='Solve Maze', command=solve_maze).grid(row=1, column=0, padx=5, pady=10)
-    Button(master, text='New Maze', command=new_maze).grid(row=1, column=1, padx=5, pady=10)
+    Button(master, text=SOLVE_MAZE_CAPTION, command=solve_maze).grid(row=1, column=0, padx=5, pady=10)
+    Button(master, text=NEW_MAZE_CAPTION, command=new_maze).grid(row=1, column=1, padx=5, pady=10)
 
 
 
 master = Tk()
-master.title('Maze Generator')
+master.title(APP_NAME)
 
 label_height = Label(master, text='Height')
 label_width = Label(master, text='Width')
@@ -91,6 +96,6 @@ entry_height.grid(row=0, column=1, padx=5, pady=5)
 entry_width.grid(row=1, column=1, padx=5, pady=5)
 entry_height.insert(0, '10')
 entry_width.insert(0, '10')
-btn_build = Button(master, text='Build Maze', command=build_maze)
+btn_build = Button(master, text=BUILD_MAZE_CAPTION, command=build_maze)
 btn_build.grid(row=2, columnspan=2, pady=10)
 mainloop()
