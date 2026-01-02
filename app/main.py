@@ -29,7 +29,7 @@ def new_maze():
     """Reset the view to create a new maze"""
     # Clear canvas and buttons
     for widget in master.grid_slaves():
-        if isinstance(widget, Canvas) or (isinstance(widget, Button) and widget.cget('text') in ['Solve Maze', 'New Maze']):
+        if isinstance(widget, Canvas) or (isinstance(widget, Button) and widget.cget('text') in [SOLVE_MAZE_CAPTION, NEW_MAZE_CAPTION]):
             widget.destroy()
 
     # Show input fields and Build Maze button again
@@ -48,7 +48,7 @@ def build_maze():
 
     # Clear previous canvas and solve button if they exist
     for widget in master.grid_slaves():
-        if isinstance(widget, Canvas) or (isinstance(widget, Button) and widget.cget('text') == 'Solve Maze'):
+        if isinstance(widget, Canvas) or (isinstance(widget, Button) and widget.cget('text') == SOLVE_MAZE_CAPTION):
             widget.destroy()
 
     # Hide input fields and Build Maze button
@@ -61,8 +61,8 @@ def build_maze():
     # Create canvas for the maze grid
     canvas_width = width * CELL_SIZE
     canvas_height = height * CELL_SIZE
-    canvas = Canvas(master, width=canvas_width, height=canvas_height, bg='white')
-    canvas.grid(row=0, column=0, columnspan=2, pady=10)
+    canvas = Canvas(master, width=canvas_width, height=canvas_height, bg='white', highlightthickness=0)
+    canvas.grid(row=0, column=0, columnspan=2)
 
     # Bind click event to canvas
     canvas.bind('<Button-1>', on_cell_click)
