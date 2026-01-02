@@ -15,6 +15,11 @@ def on_cell_click(event):
         event.widget.itemconfig(cell_id, fill=new_color)
         cells[(row, col)] = (cell_id, new_color)
 
+def solve_maze():
+    """Find and display the shortest path in the maze"""
+    print("Solving maze...")
+    # TODO: Implement pathfinding algorithm
+
 def build_maze():
     global cells
     cells = {}  # Reset cells dictionary
@@ -22,9 +27,9 @@ def build_maze():
     height = int(entry_height.get())
     width = int(entry_width.get())
 
-    # Clear previous canvas if exists
+    # Clear previous canvas and solve button if they exist
     for widget in master.grid_slaves():
-        if isinstance(widget, Canvas):
+        if isinstance(widget, Canvas) or (isinstance(widget, Button) and widget.cget('text') == 'Solve Maze'):
             widget.destroy()
 
     # Create canvas for the maze grid
@@ -38,13 +43,18 @@ def build_maze():
 
     # Draw grid
     for row in range(height):
+        y1 = row * CELL_SIZE
+        y2 = y1 + CELL_SIZE
         for col in range(width):
             x1 = col * CELL_SIZE
-            y1 = row * CELL_SIZE
             x2 = x1 + CELL_SIZE
-            y2 = y1 + CELL_SIZE
             cell_id = canvas.create_rectangle(x1, y1, x2, y2, outline='black', fill='white')
             cells[(row, col)] = (cell_id, 'white')  # Store cell ID and color
+
+    # Add Solve Maze button
+    Button(master, text='Solve Maze', command=solve_maze).grid(row=4, column=0, columnspan=2, pady=10)
+
+
 
 master = Tk()
 master.title('Maze Generator')
