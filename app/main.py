@@ -46,10 +46,6 @@ def build_maze():
     height = int(entry_height.get())
     width = int(entry_width.get())
 
-    # Clear previous canvas and solve button if they exist
-    for widget in master.grid_slaves():
-        if isinstance(widget, Canvas) or (isinstance(widget, Button) and widget.cget('text') == SOLVE_MAZE_CAPTION):
-            widget.destroy()
 
     # Hide input fields and Build Maze button
     label_height.grid_remove()
