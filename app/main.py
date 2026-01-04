@@ -31,8 +31,44 @@ def on_cell_click(event):
         event.widget.itemconfig(cell_id, fill=new_color)
         cells[(row, col)] = (cell_id, new_color)
 
-def solve_maze():
-    paths = {f'${col}:${row}': Path(x=col, y=row) for (row, col), (cell_id, color) in cells.items() if color == 'black'}
+
+def find_shortest_path(start_line, paths) -> Result:
+    return Failure("No entry point found on the top row")
+
+
+def solve_maze() -> Result:
+    paths = {Path(x=col, y=row) for (row, col), (cell_id, color) in cells.items() if color == 'black'}
+    [path.add_neighbors(paths) for path in paths]
+
+    start_line = [p for p in paths if p.y == 0]
+
+    if len(start_line) == 0:
+        return Failure("No entry point found on the top row")
+
+    return find_shortest_path(start_line, paths)
+
+
+@dataclass
+class Route:
+    """Linked list of Path elements representing a route through the maze"""
+    path: Path
+    next_route: Optional['Route'] = None
+
+
+
+@dataclass
+class Success:
+    """Represents a successful maze solution"""
+    route: Route
+
+
+@dataclass
+class Failure:
+    """Represents a failed maze solution attempt"""
+    message: str = "No suitable path found"
+
+
+Result = Union[Success, Failure]
 
 
 def create_form():
