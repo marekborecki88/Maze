@@ -1,5 +1,6 @@
 from tkinter import Tk, Label, Entry, Button, Canvas, mainloop
-from typing import Optional
+from typing import Optional, Union
+from dataclasses import dataclass
 
 from app.Path import Path
 
